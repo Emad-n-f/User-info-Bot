@@ -31,7 +31,7 @@ async def start(message: types.Message):
     await message.answer(txt,parse_mode='HTML',reply_markup=start_menu())
 
 @dp.message(Command('get_id'))
-async def get_od(message: types.Message):
+async def get_id(message: types.Message):
     chat_id = message.chat
     id = chat_id.id
     name = chat_id.title
@@ -44,7 +44,7 @@ async def get_od(message: types.Message):
     await message.answer(text,parse_mode='HTML')
 
 # === handle ===
-@dp.message(F.text == '💠 مشخصات من')
+@dp.message(F.text == 'مشخصات من')
 async def info_handle(message: types.Message):
     user = message.from_user
     x = message.chat.type
@@ -58,10 +58,11 @@ async def info_handle(message: types.Message):
         return
     else:
         txt = text
+
     await message.answer(txt,parse_mode='HTML',reply_markup=back_home_menu()) 
 
 
-@dp.message(F.text == '🆘 راهنما')
+@dp.message(F.text == 'راهنما')
 async def help_handle(message: types.Message):
     x = message.chat.type
     a = check_type_help(x)

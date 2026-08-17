@@ -6,7 +6,7 @@ class database:
         self.cur = self.con.cursor()
         self.cur.execute('''create table if not exists info_bot 
         (id integer primary key,token text,create_at text,
-        status text,owner_id text)''')
+        status text,owner_id integer)''')
         self.cur.execute('create table if not exists text_bot (id integer primary key,name text,text text)')
         self.con.commit()
 
@@ -15,9 +15,9 @@ class database:
         self.con.commit()
 
     def read_admin(self):
-        self.cur.execute('select owner_id from info_bot where id = 1')
+        self.cur.execute('select owner_id from info_bot')
         result = self.cur.fetchone()
-        return result[0]
+        return list(result)
 
     def read_token(self):
         self.cur.execute('select token from info_bot where id = 1')
@@ -33,4 +33,4 @@ class database:
         return result[0]
         
          
-db = database('db1.db')
+db = database('database.db')

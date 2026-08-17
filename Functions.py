@@ -14,6 +14,20 @@ Please enter your bot token : ''')
         return x
 
 
+# بررسی ایدی عددی برای تشخیص ادمین بودن
+def is_admin(id):
+    admins = db.read_admin()
+    if id in admins:
+        return True
+    else:
+        return False
+# بررسی نوع چت برای تشخیص چت شخصی
+def is_pv(x):
+    if x == 'private':
+        return True
+    else:
+        return False
+
 def check_type_help(x):
     if x == 'private':
         text = db.read_text('text_help')
@@ -39,9 +53,11 @@ def check_type_back_home(x):
         return None
 
 def check_type_info_chat(x,id,name):
-    if x != 'private':
+    if x == 'group' or x == 'channel' or x == 'supergroup':
         txt = db.read_text('text_infochat')
         text = txt.format(id=id,name=name)
         return text
     else:
         return None
+
+
